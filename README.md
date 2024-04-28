@@ -1,7 +1,7 @@
 # AppEasyList
-- Aplicativo de Lista de Compras.
+- Aplicação Web de Lista de Compras.
 - Agilidade e Simplicidade.
-- Produzido com **Flutter / Dart**
+- Produzido com **HTML5/CSS3**
 
 ## 👨‍💻 Equipe
 - Pedro Crescencio
