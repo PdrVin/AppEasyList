@@ -1,26 +1,25 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
-
 body {
-  font-family: 'Times New Roman', Times, serif, sans-serif;
+  font-family: "Times New Roman", Times, serif, sans-serif;
   background-color: #f2f2f2;
 }
 
 header {
-  background-color:rgb(107, 240, 107);
+  background-color: rgb(107, 240, 107);
   color: white;
   padding: 10px 0;
   text-align: center;
 }
 
-
 .page-title {
   font-size: 24px;
   font-weight: bold;
-  margin: 20px 0;
+  margin: 20px 10px;
 }
 
 .content {
@@ -30,12 +29,10 @@ header {
   padding: 0 10px;
 }
 
-
 section {
   flex: 1;
   margin-right: 10px;
 }
-
 
 #cartTable {
   width: 100%;
@@ -43,7 +40,8 @@ section {
   margin-bottom: 20px;
 }
 
-#cartTable th, #cartTable td {
+#cartTable th,
+#cartTable td {
   border: 1px solid #ccc;
   padding: 8px;
 }
@@ -53,9 +51,8 @@ section {
   text-align: left;
 }
 
-
 .qty button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -71,7 +68,6 @@ section {
   margin: 0 10px;
 }
 
-
 .remove button {
   background-color: #f44336;
 }
@@ -79,7 +75,6 @@ section {
 .remove button:hover {
   background-color: #d32f2f;
 }
-
 
 aside {
   flex: 1;
@@ -97,7 +92,6 @@ aside {
   justify-content: space-between;
 }
 
-
 footer {
   background-color: rgb(107, 240, 107);
   color: white;
@@ -111,11 +105,12 @@ footer {
 /* Media query  moblie */
 @media only screen and (max-width: 600px) {
   .content {
-      flex-direction: column;
+    flex-direction: column;
   }
 
-  section, aside {
-      width: 100%;
-      margin-right: 0;
+  section,
+  aside {
+    width: 100%;
+    margin-right: 0;
   }
 }
