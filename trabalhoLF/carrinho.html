@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho de Compras</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+   
+    .editable-input {
+      border: none;
+      outline: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    .product {
+      display: flex;
+      align-items: center;
+    }
+    .product img {
+      margin-right: 10px;
+    }
+    
+    #finalizeBtn {
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    #finalizeBtn:hover {
+      background-color: darkgreen;
+    }
+    /* Estilos para o rodapé */
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: rgb(101, 231, 101); /* Corrigido */
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px;
+    }
+
+    /*mobile*/
+    @media only screen and (max-width: 600px) {
+      .content {
+        display: flex;
+        flex-direction: column;
+      }
+      section {
+        order: 2; 
+      }
+      aside {
+        order: 1; 
+        margin-top: 20px; 
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span>Carrinho de compras <b></b></span>
+  </header>
+  <main>
+    <div class="page-title">Seu Carrinho</div>
+    <div class="content">
+      <aside>
+        <div class="box">
+          <header>Resumo da compra</header>
+          <div class="info">
+            <div><span>Sub-total</span><span id="subTotal">R$ 0.00</span></div>
+            <div><span>Frete</span><span>Gratuito</span></div>
+            <div></div>
+          </div>
+          <footer>
+            <span>Total</span>
+            <span id="totalPrice">R$ 0.00</span>
+          </footer>
+        </div>
+        <form id="checkoutForm" action="teste.html" method="post">
+          <button type="submit" id="finalizeBtn">Finalizar Compra</button>
+        </form>
+      </aside>
+      <section>
+        <table id="cartTable">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+              <th>Total</th>
+              <th>-</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+          </tbody>
+        </table>
+        <button id="addProductBtn">Adicionar Produto</button>
+      </section>
+
+      <div class="login-content" id="confirmationMessage" style="display: none;">
+        <p>Compra finalizada!</p>
+      </div>
+
+    </div>
+  </main>
+
+<footer>
+  <p>Lista Fácil &copy; 2024 - Todos os direitos reservados.</p>
+  <p>Entre em contato: contato@listafacil.com</p>
+  <a href="index.html">Voltar ao início</a>
+</footer>
+
+<script>
+  document.addEventListener("click", function (event) {
+    if (event.target && event.target.classList.contains("increaseQty")) {
+      increaseQuantity(event.target);
+    } else if (event.target && event.target.classList.contains("decreaseQty")) {
+      decreaseQuantity(event.target);
+    } else if (event.target && event.target.classList.contains("remove")) {
+      removeProduct(event.target);
+    }
+  });
+
+  document.addEventListener("input", function (event) {
+    if (event.target && event.target.classList.contains("editable-input")) {
+      updateTotal();
+    }
+  });
+
+  document.getElementById("finalizeBtn").addEventListener("click", function (event) {
+    event.preventDefault();
+    var cartItems = document.querySelectorAll("tbody tr");
+    var cartData = [];
+    cartItems.forEach(function (item) {
+      var productName = item.querySelector(".name").textContent;
+      var productCategory = item.querySelector(".category").textContent;
+      var productPrice = item.querySelector(".price").textContent;
+      var productQuantity = item.querySelector(".qty span").textContent;
+      var productTotal = item.querySelector(".total").textContent;
+      cartData.push({
+        name: productName,
+        category: productCategory,
+        price: productPrice,
+        quantity: productQuantity,
+        total: productTotal
+      });
+    });
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+
+    // Exibir msg finalizada
+    document.getElementById("confirmationMessage").style.display = "block";
+  });
+
+  document.getElementById("addProductBtn").addEventListener("click", function () {
+    addNewProduct();
+  });
+
+  function updateTotal() {
+    var total = 0;
+    document.querySelectorAll("tbody tr").forEach(function (row) {
+      var price = parseFloat(row.querySelector(".price").textContent.replace("R$ ", ""));
+      var quantity = parseInt(row.querySelector(".qty span").textContent);
+      var totalPrice = price * quantity;
+      row.querySelector(".total").textContent = "R$ " + totalPrice.toFixed(2);
+      total += totalPrice;
+    });
+    document.getElementById("subTotal").textContent = "R$ " + total.toFixed(2);
+    document.getElementById("totalPrice").textContent = "R$ " + total.toFixed(2);
+  }
+
+  function addNewProduct() {
+    var newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>
+        <div class="product">
+          <img src="imagem.jpeg" alt="Imagem do produto" width="50" height="50">
+
+          <div class="info">
+            <span contenteditable="true" class="editable-input name">Nome do produto</span>
+            <span contenteditable="true" class="editable-input category">Categoria</span>
+          </div>
+        </div>
+      </td>
+      <td><span contenteditable="true" class="editable-input price">0.00</span></td>
+      <td>
+        <div class="qty">
+          <button class="decreaseQty"><i class="bx bx-minus"></i></button>
+          <span>1</span>
+          <button class="increaseQty"><i class="bx bx-plus"></i></button>
+        </div>
+      </td>
+      <td class="total">R$ 0.00</td>
+      <td>
+        <button class="remove"><i class="bx bx-x"></i></button>
+      </td>
+    `;
+    document.querySelector("tbody").appendChild(newRow);
+    updateTotal();
+  }
+
+  function increaseQuantity(button) {
+    var span = button.parentNode.querySelector("span");
+    var currentValue = parseInt(span.textContent);
+    span.textContent = currentValue + 1;
+    updateTotal();
+  }
+
+  function decreaseQuantity(button) {
+    var span = button.parentNode.querySelector("span");
+    var currentValue = parseInt(span.textContent);
+    if (currentValue > 1) {
+      span.textContent = currentValue - 1;
+    }
+    updateTotal();
+  }
+
+  function removeProduct(button) {
+    button.parentNode.parentNode.remove();
+    updateTotal();
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* Estilos padrão para o corpo e HTML */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Estilos para o container de cadastro */
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.signup-header {
+    background-color: rgb(107, 240, 107); 
+    color: #fff; 
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+
+.signup-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px; 
+    border-radius: 10px;
+    text-align: center;
+    width: 100%; 
+    max-width: 400px; 
+}
+
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+
+.btn-signup {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-signup:hover {
+    background-color: #0056b3;
+}

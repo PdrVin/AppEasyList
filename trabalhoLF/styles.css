@@ -1,0 +1,121 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  font-family: 'Times New Roman', Times, serif, sans-serif;
+  background-color: #f2f2f2;
+}
+
+header {
+  background-color:rgb(107, 240, 107);
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+
+section {
+  flex: 1;
+  margin-right: 10px;
+}
+
+
+#cartTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#cartTable th, #cartTable td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+#cartTable th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+
+.qty button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.qty button:hover {
+  background-color: #45a049;
+}
+
+.qty span {
+  margin: 0 10px;
+}
+
+
+.remove button {
+  background-color: #f44336;
+}
+
+.remove button:hover {
+  background-color: #d32f2f;
+}
+
+
+aside {
+  flex: 1;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.info {
+  margin-bottom: 10px;
+}
+
+.info div {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+footer {
+  background-color: rgb(107, 240, 107);
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Media query  moblie */
+@media only screen and (max-width: 600px) {
+  .content {
+      flex-direction: column;
+  }
+
+  section, aside {
+      width: 100%;
+      margin-right: 0;
+  }
+}

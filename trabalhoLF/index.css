@@ -1,0 +1,95 @@
+/* Estilos padrão para o corpo e HTML */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Estilos para o container de login */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px; /* Adicionando espaçamento lateral */
+}
+
+/* Estilos para o cabeçalho do login */
+.login-header {
+    background-color: rgb(101, 231, 101); /* Cor da faixa */
+    color: #fff; /* Cor do texto */
+    padding: 10px 0; /* Ajustando o padding */
+    width: 100%;
+    text-align: center;
+}
+
+/* Estilos para o conteúdo do login */
+.login-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%; /* Garantindo que o conteúdo ocupe toda a largura */
+    max-width: 400px; /* Definindo uma largura máxima */
+}
+
+/* Estilos para os títulos */
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px; /* Ajustando o tamanho da fonte */
+}
+
+/* Estilos para os grupos de formulário */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Estilos para os rótulos */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilos para os campos de entrada */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Garantindo que o padding não aumente a largura */
+}
+
+/* Estilos para o botão de login */
+.btn-login {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para a opção de cadastro */
+.signup-option {
+    margin-top: 20px;
+    font-size: 14px; /* Ajustando o tamanho da fonte */
+}
+
+/* Estilos para o link de cadastro */
+.signup-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
