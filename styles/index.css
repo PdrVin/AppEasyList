@@ -1,14 +1,32 @@
 /* Estilos padrão para o corpo e HTML */
-body,
-html {
+
+html body {
     margin: 0;
     padding: 0;
+    width: 100%;
     height: 100%;
+    overflow-x: hidden;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(155, 238, 155);
+}
+
+footer {
+    background-color: rgb(155, 238, 155);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+}
+
 
 /* Estilos para o container de login */
 .login-container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -19,7 +37,7 @@ html {
 
 /* Estilos para o cabeçalho do login */
 .login-header {
-    background-color: rgb(101, 231, 101);
+    background-color: rgb(155, 238, 155);
     /* Cor da faixa */
     color: #fff;
     /* Cor do texto */
@@ -31,14 +49,13 @@ html {
 
 /* Estilos para o conteúdo do login */
 .login-content {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(136, 252, 169, 0.5);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     width: 100%;
-    /* Garantindo que o conteúdo ocupe toda a largura */
     max-width: 400px;
-    /* Definindo uma largura máxima */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos para os títulos */
@@ -53,6 +70,10 @@ h1 {
     margin-bottom: 15px;
     text-align: left;
 }
+/*Alinhamento do texto de login do formulário*/
+.form-group h2{
+    text-align: center;
+}
 
 /* Estilos para os rótulos */
 label {
@@ -65,16 +86,18 @@ input[type="text"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: none;
+    background-color: #bdffd0;
     border-radius: 5px;
     box-sizing: border-box;
+    
     /* Garantindo que o padding não aumente a largura */
 }
 
 /* Estilos para o botão de login */
 .btn-login {
     width: 100%;
-    background-color: #007bff;
+    background-color: #1EB1E4;
     color: #fff;
     padding: 10px;
     border: none;
