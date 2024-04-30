@@ -4,11 +4,27 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    background-color: rgb(101, 231, 101);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
 }
 
 /* Estilos para o container de login */
 .login-container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
