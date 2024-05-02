@@ -5,18 +5,19 @@ body {
 }
 
 body {
-  font-family: "Times New Roman", Times, serif, sans-serif;
-  background-color: #f2f2f2;
+  background-color: #1d2428;
+  font-family: 'Lucida Sans';
 }
 
 header {
-  background-color: rgb(107, 240, 107);
+  background-color: #02a154;
   color: white;
   padding: 10px 0;
   text-align: center;
 }
 
 .page-title {
+  color: white;
   font-size: 24px;
   font-weight: bold;
   margin: 20px 10px;
@@ -31,19 +32,20 @@ header {
 
 section {
   flex: 1;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .editable-input {
-  border: none;
-  outline: none;
   background: transparent;
+  border: none;
   cursor: pointer;
+  outline: none;
 }
 
 .product {
-  display: flex;
   align-items: center;
+  display: flex;
+  text-align: left;
 }
 
 .product img {
@@ -51,9 +53,10 @@ section {
 }
 
 #cartTable {
-  width: 100%;
   border-collapse: collapse;
+  color: white;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 #cartTable th,
@@ -63,31 +66,53 @@ section {
 }
 
 #cartTable th {
-  background-color: #f2f2f2;
+  background-color: #262d34;
   text-align: left;
 }
 
-#finalizeBtn {
-  background-color: green;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+
+#cartTable td {
+  text-align: center;
+}
+
+#addProductBtn {
+  background-color: #39d2c0;
   border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+#addProductBtn:hover {
+  background-color: #39d2c085;
+}
+
+#finalizeBtn {
+  background-color: #39d2c0;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 10px 20px;
   transition: background-color 0.3s ease;
 }
 
 #finalizeBtn:hover {
-  background-color: darkgreen;
+  background-color: #39d2c085;
 }
 
 .qty button {
   background-color: #4caf50;
-  color: white;
   border: none;
-  padding: 8px 12px;
+  border-radius: 6px;
+  color: white;
   cursor: pointer;
-  border-radius: 4px;
+  font-size: 20px;
+  height: 25px;
+  text-align: center;
+  width: 25px;
 }
 
 .qty button:hover {
@@ -98,8 +123,15 @@ section {
   margin: 0 10px;
 }
 
-.remove button {
+.remove {
   background-color: #f44336;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  height: 25px;
+  width: 25px;
 }
 
 .remove button:hover {
@@ -107,43 +139,52 @@ section {
 }
 
 aside {
-  flex: 1;
-  background-color: white;
-  padding: 10px;
   border: 1px solid #ccc;
+  flex: 1;
+  padding: 10px;
 }
 
 .info {
-  margin-bottom: 10px;
+  color: white;
 }
 
 .info div {
   display: flex;
   justify-content: space-between;
+  padding: 7px 0 7px;
+}
+
+.login-content {
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 10px 0;
+    width: 100%;
 }
 
 footer {
-  background-color: rgb(101, 231, 101);
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
+  background-color: #02a154;
   bottom: 0;
+  color: white;
+  font-size: 12px;
+  padding: 8px 0;
+  position: fixed;
+  text-align: center;
   width: 100%;
-  font-size: 14px;
 }
 
 /* Media query  moblie */
 @media only screen and (max-width: 600px) {
   .content {
-    flex-direction: column;
     display: flex;
+    flex-direction: column;
   }
 
   section,
   aside {
-    width: 100%;
     margin-right: 0;
+    width: 100%;
   }
 
   section {
@@ -151,7 +192,7 @@ footer {
   }
 
   aside {
-    order: 1;
     margin-top: 20px;
+    order: 1;
   }
 }

@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <span>Carrinho de compras <b></b></span>
+        <span style="font-size: 18px;"><b>Carrinho de compras</b></span>
     </header>
 
     <main>
@@ -19,7 +19,7 @@
 
             <aside>
                 <div class="box">
-                    <header>Resumo da compra</header>
+                    <header><b>Resumo da compra</b></header>
                     <div class="info">
                         <div><span>Sub-total</span><span id="subTotal">R$ 0.00</span></div>
                         <div><span>Frete</span><span>Gratuito</span></div>
@@ -44,7 +44,7 @@
                             <th>Preço</th>
                             <th>Quantidade</th>
                             <th>Total</th>
-                            <th>-</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +55,7 @@
                 <button id="addProductBtn">Adicionar Produto</button>
             </section>
 
-            <div class="login-content" id="confirmationMessage" style="display: none;">
+            <div class="login-content" id="confirmationMessage" style="display: none; color: white; ">
                 <p>Compra finalizada!</p>
             </div>
 
@@ -63,9 +63,8 @@
     </main>
 
     <footer>
-        <p>Lista Fácil &copy; 2024 - Todos os direitos reservados.</p>
-        <p>Entre em contato: contato@listafacil.com</p>
-        <a href="/index.html">Voltar ao início</a>
+        <p>Lista Fácil &copy; 2024 - Todos os direitos reservados.<br>Entre em contato: contato@listafacil.com</p>
+        <a href="/index.html">Voltar ao início</a></p>
     </footer>
 
     <script>
@@ -134,22 +133,22 @@
                 <img src="../images/logo.jpeg" alt="Imagem do produto" width="50" height="50">
 
                 <div class="info">
-                    <span contenteditable="true" class="editable-input name">Nome do produto</span>
+                    <span contenteditable="true" class="editable-input name">Nome do produto</span><br>
                     <span contenteditable="true" class="editable-input category">Categoria</span>
                 </div>
-                </div>
+                
             </td>
             <td><span contenteditable="true" class="editable-input price">0.00</span></td>
             <td>
                 <div class="qty">
-                <button class="decreaseQty"><i class="bx bx-minus"></i></button>
+                <button class="decreaseQty">-<i class="bx bx-minus"></i></button>
                 <span>1</span>
-                <button class="increaseQty"><i class="bx bx-plus"></i></button>
+                <button class="increaseQty">+<i class="bx bx-plus"></i></button>
                 </div>
             </td>
             <td class="total">R$ 0.00</td>
             <td>
-                <button class="remove"><i class="bx bx-x"></i></button>
+                <button class="remove">X<i class="bx bx-x"></i></button>
             </td>
             `;
             document.querySelector("tbody").appendChild(newRow);
