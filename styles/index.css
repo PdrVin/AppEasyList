@@ -1,5 +1,3 @@
-
-
 /* Estilos padrão para o corpo e HTML */
 body,
 html {
@@ -58,14 +56,14 @@ footer {
 
 /* Estilos para o conteúdo do login */
 .login-content {
+    text-align: center;
+    width: 30%;
+}
+
+.login-form {
     background-color: #36704c;
     border-radius: 20px;
     padding: 2rem;
-    height: 40%;
-    text-align: center;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
 }
 
 /* Estilos para os títulos */
