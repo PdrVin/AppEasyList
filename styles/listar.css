@@ -1,11 +1,14 @@
-body {
-    font-family: 'Times New Roman', Times, serif, sans-serif;
+body, html {
+    font-family: 'Lucida Sans';
+    background-color: #1d2428;
     margin: 0;
     padding: 0;
+    width: 100%;
+    color: white;
 }
 
 .container {
-    background-color: #f9f9f9;
+    background-color: #57636c;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(103, 230, 191, 0.1);
@@ -25,9 +28,16 @@ h1 {
 input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin: 0 10px;
     padding: 8px;
-    width: 100%;
+    
+}
+
+input[type="number"] {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 8px;
 }
 
 button {
@@ -38,7 +48,6 @@ button {
     cursor: pointer;
     margin-bottom: 10px;
     padding: 8px 16px;
-    width: 100%;
 }
 
 ul {
@@ -50,21 +59,30 @@ li {
     margin-bottom: 10px;
 }
 
+.item-name {
+    margin-right: 20px;
+}
+
+.item-value {
+    margin-right: 20px;
+}
+
 .removeBtn {
     border: none;
     border-radius: 5px;
     background-color: #dc3545;
     color: #fff;
     cursor: pointer;
+    margin: 0 10px;
     padding: 4px 8px;
 }
 
 footer {
-    background-color: rgb(101, 231, 101);
+    background-color: #02a154;
     bottom: 0;
-    color: white;
-    font-size: 14px;
-    padding: 10px 0;
+    color: white;    
+    font-size: 12px;
+    padding: 15px 0;
     position: fixed;
     text-align: center;
     width: 100%;
