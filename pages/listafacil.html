@@ -6,17 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista Fácil</title>
     <link rel="stylesheet" href="/styles/listar.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 
 <body>
     <main class="container">
         <h1>Lista Fácil</h1>
-        <div class="form">
+        <h2>Criar Nova Lista</h2>
+        <button id="showFormBtn" onclick="showForm()">
+            <i class="fas fa-plus"></i> 
+        </button>
+        <div class="form hidden">
             <label>Item</label>
             <input type="text" id="item" placeholder="Digite um item">
             <label>Valor</label>
             <input type="number" id="valor" min="0.01" step="any" placeholder="Insira o valor">
+            <label>Quantidade</label>
+            <input type="number" id="quantidade" min="1" placeholder="Insira a quantidade" value="1">
             <button id="addBtn">Adicionar Item</button>
         </div>
         <ul id="itemList">
@@ -25,49 +33,66 @@
         <div>
             <span>Total:</span>
             <span id="totalValue">R$ 0.00</span>
-        <button id="checkoutBtn" onclick="redirectToCheckout()">Agendar Produtos</button>
+            <button id="saveBtn" onclick="openTextBox()">Salvar Lista</button>
+            <div id="textBoxContainer" style="display: none;">
+                <input type="text" id="textBox" placeholder="Digite algo">
+                <button id="sendBtn" onclick="sendText()">Enviar</button>
+            </div>
         </div>
     </main>
 
+    <main class="listas">
+        <h1>Lista Fácil</h1>
+        <h2>Listas Salvas</h2>
+    </main>
+
     <script>
-        document.getElementById("addBtn").addEventListener("click", addItem);
+document.getElementById("addBtn").addEventListener("click", addItem);
 
-        function addItem() {
-            var newItem = document.getElementById("item").value;
-            var newValue = parseFloat(document.getElementById("valor").value);
+function saveAllItems() {
+    var itemList = document.getElementById("itemList").innerHTML;
+    localStorage.setItem("shoppingList", itemList);
+}
 
-            if (newItem !== "" && !isNaN(newValue)) {
-                var itemList = document.getElementById("itemList");
-                var li = document.createElement("li");
-                
-                var itemName = document.createElement("span");
-                itemName.className = "item-name";
-                itemName.textContent = newItem;
-                li.appendChild(itemName);
-                
-                var itemValue = document.createElement("span");
-                itemValue.className = "item-value";
-                itemValue.textContent = "R$ " + newValue.toFixed(2);
-                li.appendChild(itemValue);
+function addItem(newItem, newValue, quantity) {
+    var itemList = document.getElementById("itemList");
+    var li = document.createElement("li");
 
-                var removeBtn = document.createElement("button");
-                removeBtn.textContent = "Remover";
-                removeBtn.className = "removeBtn";
-                removeBtn.addEventListener("click", function () {
-                    removeItem(li, newValue);
-                });
-                li.appendChild(removeBtn);
+    var itemName = document.createElement("span");
+    itemName.className = "item-name";
+    itemName.textContent = newItem;
+    li.appendChild(itemName);
 
-                itemList.appendChild(li);
-                updateTotalValue(newValue);
+    var itemValue = document.createElement("span");
+    itemValue.className = "item-value";
+    itemValue.textContent = "R$ " + (newValue * quantity).toFixed(2);
+    li.appendChild(itemValue);
 
-                saveItems();
-                document.getElementById("item").value = "";
-                document.getElementById("valor").value = "";
-            } else {
-                alert("Por favor, digite um item e um valor numérico.");
-            }
-        }
+    var itemQuantity = document.createElement("span");
+    itemQuantity.className = "item-quantity";
+    itemQuantity.textContent = "Quantidade: " + quantity;
+    li.appendChild(itemQuantity);
+
+    var removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remover";
+    removeBtn.className = "removeBtn";
+    removeBtn.addEventListener("click", function () {
+        removeItem(li, newValue * quantity);
+    });
+    li.appendChild(removeBtn);
+
+    itemList.appendChild(li);
+    updateTotalValue(newValue * quantity);
+
+    saveItems();
+}
+
+
+function removeItem(item, value) {
+  item.parentNode.removeChild(item);
+  updateTotalValue(-value);
+}
+        
 
         function removeItem(item, value) {
             item.parentNode.removeChild(item);
@@ -92,6 +117,22 @@
             if (storedItems) {
                 document.getElementById("itemList").innerHTML = storedItems;
             }
+        
+            var removeButtons = document.getElementsByClassName("removeBtn");
+            var totalValue = 0;
+        
+            for (var i = 0; i < removeButtons.length; i++) {
+                var valueSpan = removeButtons[i].previousElementSibling;
+                var value = parseFloat(valueSpan.textContent.slice(2));
+                totalValue += value;
+        
+                removeButtons[i].addEventListener("click", function () {
+                    removeItem(this.parentNode, value);
+                });
+            }
+        
+            updateTotalValue(totalValue);
+        };
 
             var removeButtons = document.getElementsByClassName("removeBtn");
             for (var i = 0; i < removeButtons.length; i++) {
@@ -102,17 +143,126 @@
                 });
                 updateTotalValue(value);
             }
-        };
 
-        function redirectToCheckout() {
-            window.location.href = "/pages/carrinho.html";
+        function showForm() {
+            Swal.fire({
+                title: 'Adicionar Item',
+                html: `
+                    <input type="text" id="item" placeholder="Digite um item" class="swal2-input">
+                    <input type="number" id="valor" min="0.01" step="any" placeholder="Insira o valor" class="swal2-input">
+                    <input type="number" id="quantidade" min="1" placeholder="Insira a quantidade" value="1" class="swal2-input">
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Adicionar',
+                cancelButtonText: 'Cancelar',
+                focusConfirm: false,
+                preConfirm: () => {
+                    const newItem = Swal.getPopup().querySelector('#item').value;
+                    const newValue = parseFloat(Swal.getPopup().querySelector('#valor').value);
+                    const quantity = parseInt(Swal.getPopup().querySelector('#quantidade').value);
+                    
+                    if (newItem !== "" && !isNaN(newValue) && quantity > 0) {
+                        addItem(newItem, newValue, quantity);
+                    } else {
+                        Swal.showValidationMessage("Por favor, preencha o item, o valor e a quantidade corretamente.");
+                    }
+                }
+            });
         }
+
+        function openTextBox() {
+            Swal.fire({
+                title: 'Digite algo',
+                input: 'text',
+                inputPlaceholder: 'Digite o Nome da Lista',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Enviar',
+                allowOutsideClick: false,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Por favor, digite algo!';
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const text = result.value;
+                    sendText(text);
+                }
+            });
+        }
+
+        function sendText(text) {
+            Swal.fire({
+                title: 'Lista Salva:',
+                text: text,
+                icon: 'info'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    sendListToClass(text);
+                }
+            });
+        }
+        
+        function sendListToClass(list) {
+            var listasContainer = document.querySelector('.listas');
+          
+            var listaItem = document.createElement('div');
+            listaItem.classList.add('lista-item');
+          
+            var icon = document.createElement('i');
+            icon.classList.add('fas', 'fa-shopping-basket');
+            listaItem.appendChild(icon);
+          
+            var texto = document.createElement('span');
+            texto.textContent = list;
+            listaItem.appendChild(texto);
+          
+          
+            // Adicionar evento de clique ao lista-item
+            listaItem.addEventListener('click', function () {
+              exibirInformacoesSalvas();
+            });
+          
+            listasContainer.appendChild(listaItem);
+          }
+          
+          function exibirInformacoesSalvas() {
+            var itemList = document.getElementById("itemList");
+            var items = itemList.getElementsByTagName("li");
+            var savedItems = [];
+          
+            for (var i = 0; i < items.length; i++) {
+              var itemName = items[i].querySelector(".item-name").textContent;
+              var itemValue = items[i].querySelector(".item-value").textContent;
+              var itemQuantity = items[i].querySelector(".item-quantity").textContent;
+          
+              savedItems.push("Item: " + itemName + " | Quantidade: " + itemQuantity + " | Valor Total: " + itemValue);
+            }
+          
+            Swal.fire({
+              title: 'Lista Salva:',
+              html: savedItems.join("<br>"),
+              icon: 'info'
+            });
+          }
+
+          function sendText(text) {
+            Swal.fire({
+              title: 'Lista Salva:',
+              text: text,
+              icon: 'info'
+            }).then((result) => {
+              sendListToClass(text); // Adiciona a chamada para a função sendListToClass() aqui
+            });
+          }
+          
     </script>
 
     <!-- Rodapé -->
     <footer>
         <p>Lista Fácil &copy; 2024 - Todos os direitos reservados.<br>
-        Entre em contato: contato@listafacil.com</p>
+            Entre em contato: contato@listafacil.com</p>
         <a href="/index.html">Voltar ao início</a>
     </footer>
 </body>

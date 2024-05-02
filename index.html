@@ -9,39 +9,37 @@
 </head>
 
 <body>
-    <section class="login-container">
+    <div class="login-container">
         <header class="login-header">
-            <img src="/images/logo.png" alt="logo" width="70" height="70" style="margin: 10px; border-radius: 7px">
             <h1>Lista Fácil</h1>
+            <img src="/images/logo.jpeg" alt="logo" width="50" height="50">
         </header>
 
         <main class="login-content">
-            <form class="login-form" action="/pages/listafacil.html">
-                <h2>Login</h2>
+            <form class="login-form" action="/pages/listafacil.html" method="post">
                 <div class="form-group">
-                    <input type="text" id="username" name="username" required>
+                    <h2>Login</h2>
                     <label for="username">Usuário:</label>
+                    <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
                 </div>
-
                 <div class="form-group">
-                    <input type="password" id="password" name="password" required>
                     <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
                 </div>
-
                 <button type="submit" class="btn-login">Entrar</button>
-
-                <div class="signup-option">
-                    <span>Não tem uma conta?</span>
-                    <a href="/pages/criarconta.html" class="signup-link">Crie uma conta</a>
-                </div>
             </form>
+            <div class="signup-option">
+                <span>Não tem uma conta?</span>
+                <a href="/pages/criarconta.html" class="signup-link">Crie uma conta</a>
+            </div>
         </main>
-    </section>
+    </div>
 
     <!-- Rodapé -->
     <footer>
-        <p>Lista Fácil &copy; 2024 - Todos os direitos reservados.<br>Entre em contato: contato@listafacil.com</p>
-        <a href="/index.html">Voltar ao início</a>
+        <p>Lista Fácil &copy; 2024 - Todos os direitos reservados.</p>
+        <p>Entre em contato: contato@listafacil.com</p>
+        <a href="#">Voltar ao início</a>
     </footer>
 </body>
 
