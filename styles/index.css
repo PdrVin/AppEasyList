@@ -1,3 +1,5 @@
+
+
 /* Estilos padrão para o corpo e HTML */
 body,
 html {
@@ -29,7 +31,7 @@ footer {
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
     padding: 0 20px;
@@ -44,7 +46,7 @@ footer {
     height: auto;
     text-align: center;
     border-radius: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,21 +59,22 @@ footer {
     border-radius: 10px;
     text-align: center;
     width: 100%;
-    /* Garantindo que o conteúdo ocupe toda a largura */
-    max-width: 400px;
-    /* Definindo uma largura máxima */
+    max-width: 500px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Estilos para os títulos */
 h1 {
-    margin: 20px 0;
-    font-size: 24px;
+    margin: 20px 10px;
     /* Ajustando o tamanho da fonte */
+    font-size: 30px;
 }
 
 /* Estilos para os grupos de formulário */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: left;
     color: white;
 }
@@ -112,7 +115,7 @@ input[type="password"] {
 
 /* Estilos para a opção de cadastro */
 .signup-option {
-    margin-top: 20px;
+    margin: 20px 0;
     font-size: 14px;
     /* Ajustando o tamanho da fonte */
 }

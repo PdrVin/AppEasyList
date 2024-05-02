@@ -11,27 +11,31 @@
 <body>
     <section class="login-container">
         <header class="login-header">
-            <img src="/images/logo.jpeg" alt="logo" width="50" height="50" style="margin: 0 10px; border-radius: 7px">
+            <img src="/images/logo.png" alt="logo" width="70" height="70" style="margin: 10px; border-radius: 7px">
             <h1>Lista Fácil</h1>
         </header>
 
         <main class="login-content">
             <form class="login-form" action="/pages/listafacil.html" method="post">
+
                 <div class="form-group">
                     <h2>Login</h2>
                     <label for="username">Usuário:</label>
                     <input type="text" id="username" name="username" placeholder="Digite seu Usuário" required>
                 </div>
+
                 <div class="form-group">
                     <label for="password">Senha:</label>
                     <input type="password" id="password" name="password" placeholder="Digite sua Senha" required>
                 </div>
+
                 <button type="submit" class="btn-login">Entrar</button>
+
+                <div class="signup-option">
+                    <span>Não tem uma conta?</span>
+                    <a href="/pages/criarconta.html" class="signup-link">Crie uma conta</a>
+                </div>
             </form>
-            <div class="signup-option">
-                <span>Não tem uma conta?</span>
-                <a href="/pages/criarconta.html" class="signup-link">Crie uma conta</a>
-            </div>
         </main>
     </section>
 
