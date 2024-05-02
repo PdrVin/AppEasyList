@@ -1,30 +1,39 @@
 /* Estilos padrão para o corpo e HTML */
 body,
 html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: white;
+    background-color: #1d2428;
+    background-image: url(/images/background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: 'Lucida Sans';
 }
 
 /* Estilos para o container de cadastro */
 .signup-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100%;
 }
 
 .signup-header {
-    background-color: rgb(107, 240, 107);
-    color: #fff;
-    padding: 10px;
+    background-color: #02a154;
     width: 100%;
+    height: auto;
     text-align: center;
+    border-radius: 20px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .signup-content {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #36704c;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -36,29 +45,47 @@ h1 {
     margin-bottom: 20px;
 }
 
+h2 {
+    margin: 10px 0;
+}
 .form-group {
-    margin-bottom: 15px;
     text-align: left;
+    color: white;
+    position: relative;
+    margin: 20px 0;
+    border-bottom: 2px solid #fff;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.5s ease-in-out;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding-bottom: 5px;
+    color: #fff;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+    top: 0px;
 }
 
 .btn-signup {
     width: 100%;
-    background-color: #007bff;
+    background-color: #39d2c0;
     color: #fff;
     padding: 10px;
     border: none;
@@ -68,12 +95,17 @@ input[type="password"] {
 }
 
 .btn-signup:hover {
-    background-color: #0056b3;
+    background-color: #39d2c085;
 }
 
 footer {
-    width: 100%;
-    background-color: rgb(101, 231, 101);
+    background-color: #02a154;
     color: white;
     text-align: center;
+    padding: 12px 0;
+    font-size: 12px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
