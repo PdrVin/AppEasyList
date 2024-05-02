@@ -1,11 +1,13 @@
 /* Estilos padrão para o corpo e HTML */
 body,
 html {
+    background-color: #1d2428;
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     overflow-x: hidden;
+    font-family: 'Lucida Sans';
 }
 
 body {
@@ -15,10 +17,11 @@ body {
 }
 
 footer {
-    background-color: rgb(101, 231, 101);
+    background-color: #02a154;
     color: white;
     text-align: center;
-    padding: 10px 20px;
+    padding: 15px 0;
+    font-size: 12px;
 }
 
 /* Estilos para o container de login */
@@ -35,19 +38,21 @@ footer {
 
 /* Estilos para o cabeçalho do login */
 .login-header {
-    background-color: rgb(101, 231, 101);
-    /* Cor da faixa */
-    color: #fff;
-    /* Cor do texto */
-    padding: 10px 0;
-    /* Ajustando o padding */
+    background-color: #02a154;
+    color: white;
     width: 100%;
+    height: auto;
     text-align: center;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Estilos para o conteúdo do login */
 .login-content {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #57636c;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -59,7 +64,7 @@ footer {
 
 /* Estilos para os títulos */
 h1 {
-    margin-bottom: 20px;
+    margin: 20px 0;
     font-size: 24px;
     /* Ajustando o tamanho da fonte */
 }
@@ -68,6 +73,7 @@ h1 {
 .form-group {
     margin-bottom: 15px;
     text-align: left;
+    color: white;
 }
 
 /* Estilos para os rótulos */
@@ -90,9 +96,10 @@ input[type="password"] {
 /* Estilos para o botão de login */
 .btn-login {
     width: 100%;
-    background-color: #007bff;
+    background-color: #39d2c0;
     color: #fff;
     padding: 10px;
+    font-size: 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -100,7 +107,7 @@ input[type="password"] {
 }
 
 .btn-login:hover {
-    background-color: #0056b3;
+    background-color: #39d2c085;
 }
 
 /* Estilos para a opção de cadastro */
@@ -112,7 +119,7 @@ input[type="password"] {
 
 /* Estilos para o link de cadastro */
 .signup-link {
-    color: #007bff;
+    color: #39d2c0;
     text-decoration: none;
 }
 
