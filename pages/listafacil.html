@@ -206,18 +206,13 @@ function removeItem(item, value) {
         
         function sendListToClass(list) {
             var listasContainer = document.querySelector('.listas');
-          
             var listaItem = document.createElement('div');
             listaItem.classList.add('lista-item');
           
-            var icon = document.createElement('i');
-            icon.classList.add('fas', 'fa-shopping-basket');
-            listaItem.appendChild(icon);
-          
             var texto = document.createElement('span');
             texto.textContent = list;
+            texto.classList.add('item-text'); // Adiciona a classe 'item-text' ao elemento de texto
             listaItem.appendChild(texto);
-          
           
             // Adicionar evento de clique ao lista-item
             listaItem.addEventListener('click', function () {
@@ -231,21 +226,27 @@ function removeItem(item, value) {
             var itemList = document.getElementById("itemList");
             var items = itemList.getElementsByTagName("li");
             var savedItems = [];
-          
+            var totalValue = 0; // Variável para armazenar a soma total dos valores
+        
             for (var i = 0; i < items.length; i++) {
-              var itemName = items[i].querySelector(".item-name").textContent;
-              var itemValue = items[i].querySelector(".item-value").textContent;
-              var itemQuantity = items[i].querySelector(".item-quantity").textContent;
-          
-              savedItems.push("Item: " + itemName + " | Quantidade: " + itemQuantity + " | Valor Total: " + itemValue);
+                var itemName = items[i].querySelector(".item-name").textContent;
+                var itemValue = items[i].querySelector(".item-value").textContent;
+                var itemQuantity = items[i].querySelector(".item-quantity").textContent;
+        
+                savedItems.push("Item: " + itemName + " | Quantidade: " + itemQuantity + " | Valor: " + itemValue);
+        
+                var value = parseFloat(itemValue.slice(2)); // Extrai o valor numérico do texto "R$ X.XX"
+                totalValue += value; // Adiciona o valor ao totalValue
             }
-          
+        
+            savedItems.push("Total: R$ " + totalValue.toFixed(2)); // Adiciona a soma total ao array savedItems
+        
             Swal.fire({
-              title: 'Lista Salva:',
-              html: savedItems.join("<br>"),
-              icon: 'info'
+                title: 'Lista Salva:',
+                html: savedItems.join("<br>"),
+                icon: 'info'
             });
-          }
+        }
 
           function sendText(text) {
             Swal.fire({
