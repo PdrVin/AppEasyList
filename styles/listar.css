@@ -52,11 +52,17 @@ input {
     width: 200px;
 }
 
-.lista-item{
+.lista-item {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+.item-text{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    flex: wrap;
     height: 100%;
     font-family: 'Lucida Sans';
     text-align: center;
