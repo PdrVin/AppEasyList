@@ -48,8 +48,9 @@ input {
 
 #showFormBtn{
     background-color: #02a154;
-    height: 200px;
-    width: 200px;
+    height: 120px;
+    width: 120px;
+    border-radius: 10px;
 }
 
 .lista-item {
@@ -64,13 +65,15 @@ input {
     flex-direction: column;
     flex: wrap;
     height: 100%;
-    font-family: 'Lucida Sans';
+    
     text-align: center;
     background-color: #02a154;
-    height: 200px;
-    width: 200px;
+    height: 120px;
+    width: 120px;
+    border-radius: 10px;
     text-decoration: solid;
 }
+
 .lista-item :hover{
     cursor: pointer;
 }
@@ -81,6 +84,12 @@ input {
 
 .fa-plus{
     font-size: 50px;
+}
+
+.swal2-popup {
+    background-color: #043016;
+    border-radius: 20px;
+    color: white;
 }
 
 button {
@@ -129,7 +138,6 @@ footer {
     color: white;    
     font-size: 12px;
     padding: 15px 0;
-    position: fixed;
     text-align: center;
     width: 100%;
 }
