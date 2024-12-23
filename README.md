@@ -7,7 +7,3 @@
 - Pedro Crescencio
 - Vinícius Moreira
 - Lidiane Ferreira
-- Victor Gomes
-- Luis Liberona
-- Denison Jesus
-- Raian Oliveira
