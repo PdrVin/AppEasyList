@@ -1,8 +1,35 @@
 document.getElementById("addBtn").addEventListener("click", addItem);
 
-function saveAllItems() {
-  var itemList = document.getElementById("itemList").innerHTML;
-  localStorage.setItem("shoppingList", itemList);
+function showForm() {
+  Swal.fire({
+    title: "Adicionar Item",
+    html: `
+                    <input type="text" id="item" placeholder="Digite um item" class="swal2-input">
+                    <input type="number" id="valor" min="0.01" step="any" placeholder="Insira o valor" class="swal2-input">
+                    <input type="number" id="quantidade" min="1" placeholder="Insira a quantidade" value="1" class="swal2-input">
+                `,
+    showCancelButton: true,
+    confirmButtonText: "Adicionar",
+    cancelButtonText: "Cancelar",
+    focusConfirm: false,
+    preConfirm: () => {
+      const newItem = Swal.getPopup().querySelector("#item").value;
+      const newValue = parseFloat(
+        Swal.getPopup().querySelector("#valor").value
+      );
+      const quantity = parseInt(
+        Swal.getPopup().querySelector("#quantidade").value
+      );
+
+      if (newItem !== "" && !isNaN(newValue) && quantity > 0) {
+        addItem(newItem, newValue, quantity);
+      } else {
+        Swal.showValidationMessage(
+          "Por favor, preencha o item, o valor e a quantidade corretamente."
+        );
+      }
+    },
+  });
 }
 
 function addItem(newItem, newValue, quantity) {
@@ -41,11 +68,6 @@ function addItem(newItem, newValue, quantity) {
 function removeItem(item, value) {
   item.parentNode.removeChild(item);
   updateTotalValue(-value);
-}
-
-function removeItem(item, value) {
-  item.parentNode.removeChild(item);
-  updateTotalValue(-value);
   saveItems();
 }
 
@@ -56,7 +78,34 @@ function updateTotalValue(value) {
   totalValueSpan.textContent = "R$ " + updatedValue.toFixed(2);
 }
 
+function openTextBox() {
+  Swal.fire({
+    title: "Digite algo",
+    input: "text",
+    inputPlaceholder: "Digite o Nome da Lista",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",
+    confirmButtonText: "Enviar",
+    allowOutsideClick: false,
+    inputValidator: (value) => {
+      if (!value) {
+        return "Por favor, digite algo!";
+      }
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const text = result.value;
+      sendText(text);
+    }
+  });
+}
+
 function saveItems() {
+  var itemList = document.getElementById("itemList").innerHTML;
+  localStorage.setItem("shoppingList", itemList);
+}
+
+function saveAllItems() {
   var itemList = document.getElementById("itemList").innerHTML;
   localStorage.setItem("shoppingList", itemList);
 }
@@ -93,60 +142,6 @@ for (var i = 0; i < removeButtons.length; i++) {
   updateTotalValue(value);
 }
 
-function showForm() {
-  Swal.fire({
-    title: "Adicionar Item",
-    html: `
-                    <input type="text" id="item" placeholder="Digite um item" class="swal2-input">
-                    <input type="number" id="valor" min="0.01" step="any" placeholder="Insira o valor" class="swal2-input">
-                    <input type="number" id="quantidade" min="1" placeholder="Insira a quantidade" value="1" class="swal2-input">
-                `,
-    showCancelButton: true,
-    confirmButtonText: "Adicionar",
-    cancelButtonText: "Cancelar",
-    focusConfirm: false,
-    preConfirm: () => {
-      const newItem = Swal.getPopup().querySelector("#item").value;
-      const newValue = parseFloat(
-        Swal.getPopup().querySelector("#valor").value
-      );
-      const quantity = parseInt(
-        Swal.getPopup().querySelector("#quantidade").value
-      );
-
-      if (newItem !== "" && !isNaN(newValue) && quantity > 0) {
-        addItem(newItem, newValue, quantity);
-      } else {
-        Swal.showValidationMessage(
-          "Por favor, preencha o item, o valor e a quantidade corretamente."
-        );
-      }
-    },
-  });
-}
-
-function openTextBox() {
-  Swal.fire({
-    title: "Digite algo",
-    input: "text",
-    inputPlaceholder: "Digite o Nome da Lista",
-    showCancelButton: true,
-    cancelButtonText: "Cancelar",
-    confirmButtonText: "Enviar",
-    allowOutsideClick: false,
-    inputValidator: (value) => {
-      if (!value) {
-        return "Por favor, digite algo!";
-      }
-    },
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const text = result.value;
-      sendText(text);
-    }
-  });
-}
-
 function sendText(text) {
   Swal.fire({
     title: "Lista Salva:",
@@ -171,13 +166,13 @@ function sendListToClass(list) {
 
   // Adicionar evento de clique ao lista-item
   listaItem.addEventListener("click", function () {
-    exibirInformacoesSalvas();
+    showSavedInformation();
   });
 
   listasContainer.appendChild(listaItem);
 }
 
-function exibirInformacoesSalvas() {
+function showSavedInformation() {
   var itemList = document.getElementById("itemList");
   var items = itemList.getElementsByTagName("li");
   var savedItems = [];
