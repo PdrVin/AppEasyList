@@ -11,22 +11,23 @@
 
 <body>
     <section class="login-container">
-        <header class="login-header">
+        <header class="login-header bg-success">
             <img src="/images/logo.png" alt="logo" width="70" height="70" style="margin: 10px; border-radius: 7px">
-            <h1>Lista Fácil</h1>
+            <h1>App EasyList</h1>
         </header>
 
         <main class="login-content">
             <form class="login-form" action="/pages/listafacil.html">
                 <h2>Login</h2>
-                <div class="form-group">
-                    <input type="text" id="username" name="username" required>
-                    <label for="username">Usuário:</label>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Username" required>
+                    <label for="floatingInput">Username</label>
                 </div>
 
-                <div class="form-group">
-                    <input type="password" id="password" name="password" required>
-                    <label for="password">Senha:</label>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                    <label for="floatingPassword">Password</label>
                 </div>
 
                 <button type="submit" class="btn-login">Entrar</button>
@@ -40,8 +41,8 @@
     </section>
 
     <!-- Rodapé -->
-    <footer>
-        <p>Lista Fácil &copy; 2024 - Todos os direitos reservados.<br>Entre em contato: contato@listafacil.com</p>
+    <footer class="fixed-bottom bg-success">
+        <p>App EasyList &copy; 2024 - Todos os direitos reservados.<br>Entre em contato: contato@listafacil.com</p>
         <a href="/index.html">Voltar ao início</a>
     </footer>
 </body>

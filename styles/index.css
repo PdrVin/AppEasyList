@@ -73,6 +73,10 @@ h1 {
     font-size: 30px;
 }
 
+h2 {
+    padding-bottom: 1rem;
+}
+
 /* Estilos para os grupos de formulário */
 .form-group {
     text-align: left;
@@ -114,8 +118,7 @@ input:valid ~ label {
 button {
     width: 30%;
     height: 40px;
-    border-radius: 40px;
-    background-color: #39d2c0;
+    background-color: #28be99;
     border: none;
     outline: none;
     cursor: pointer;
@@ -125,8 +128,12 @@ button {
     transition: all 0.4s ease;
 }
 
+.btn-login {
+    border-radius: .375rem;
+}
+
 .btn-login:hover {
-    background-color: #39d2c085;
+    background-color: #28be99b7;
 }
 
 /* Estilos para a opção de cadastro */
