@@ -16,7 +16,7 @@
             <h1>App EasyList</h1>
         </header>
 
-        <main class="login-content">
+        <main class="container-sm login-content">
             <form class="login-form" action="/pages/listafacil.html">
                 <h2>Login</h2>
 
@@ -33,18 +33,33 @@
                 <button type="submit" class="btn-login">Entrar</button>
 
                 <div class="signup-option">
-                    <span>Não tem uma conta?</span>
-                    <a href="/pages/criarconta.html" class="signup-link"><b>Crie uma conta</b></a>
+                    <span>Não tem uma conta?</span><br>
+                    <a href="/pages/criarconta.html" class="link signup-link"><b>Crie uma conta</b></a>
                 </div>
             </form>
         </main>
     </section>
 
     <!-- Rodapé -->
-    <footer class="fixed-bottom bg-success">
-        <p>App EasyList &copy; 2024 - Todos os direitos reservados.<br>Entre em contato: contato@listafacil.com</p>
-        <a href="/index.html">Voltar ao início</a>
+    <footer class="py-2 bg-success">
+        <p class="my-0">App EasyList &copy; 2024 - Todos os direitos reservados.<br>
+            Entre em contato: contato@listafacil.com</p>
     </footer>
+    <script>
+        function adjustFooterPosition() {
+            const footer = document.querySelector('footer');
+            if (document.body.scrollHeight < 610) {
+                footer.style.position = 'fixed';
+            } else {
+                footer.style.position = 'relative';
+            }
+        }
+
+        // Ajustar a posição do footer ao carregar a página
+        window.onload = adjustFooterPosition;
+        // Ajustar a posição do footer ao redimensionar a janela
+        window.onresize = adjustFooterPosition;
+    </script>
 </body>
 
 </html>
