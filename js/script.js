@@ -1,17 +1,18 @@
-document.getElementById("addBtn").addEventListener("click", addItem);
+let itemId = 1; // ID incremental
+
+document.getElementById("showFormBtn").addEventListener("click", showForm);
 
 function showForm() {
   Swal.fire({
     title: "Adicionar Item",
     html: `
-                    <input type="text" id="item" placeholder="Digite um item" class="swal2-input">
-                    <input type="number" id="valor" min="0.01" step="any" placeholder="Insira o valor" class="swal2-input">
-                    <input type="number" id="quantidade" min="1" placeholder="Insira a quantidade" value="1" class="swal2-input">
-                `,
+      <input type="text" id="item" placeholder="Digite um Item" class="swal2-input fs-5">
+      <input type="number" id="valor" min="0.50" step="any" placeholder="Insira o Valor (R$)" class="swal2-input fs-5">
+      <input type="number" id="quantidade" min="1" placeholder="Insira a Quantidade" class="swal2-input fs-5">
+    `,
     showCancelButton: true,
     confirmButtonText: "Adicionar",
     cancelButtonText: "Cancelar",
-    focusConfirm: false,
     preConfirm: () => {
       const newItem = Swal.getPopup().querySelector("#item").value;
       const newValue = parseFloat(
@@ -21,196 +22,162 @@ function showForm() {
         Swal.getPopup().querySelector("#quantidade").value
       );
 
-      if (newItem !== "" && !isNaN(newValue) && quantity > 0) {
-        addItem(newItem, newValue, quantity);
-      } else {
-        Swal.showValidationMessage(
-          "Por favor, preencha o item, o valor e a quantidade corretamente."
-        );
+      if (!newItem || isNaN(newValue) || quantity <= 0) {
+        Swal.showValidationMessage("Preencha todos os campos corretamente.");
+        return false;
       }
+
+      addItem(newItem, newValue, quantity);
     },
   });
 }
 
 function addItem(newItem, newValue, quantity) {
-  var itemList = document.getElementById("itemList");
-  var li = document.createElement("li");
+  let table = document.getElementById("itemTable");
+  let row = table.insertRow();
 
-  var itemName = document.createElement("span");
-  itemName.className = "item-name";
-  itemName.textContent = newItem;
-  li.appendChild(itemName);
+  row.innerHTML = `
+        <td scope="row">${itemId}</td>
+        <td>${newItem}</td>
+        <td>R$ ${newValue.toFixed(2)}</td>
+        <td>${quantity}</td>
+        <td>R$ ${(newValue * quantity).toFixed(2)}</td>
+        <td><button class="btn btn-danger" id="removeBtn">Remover</button></td>
+    `;
 
-  var itemValue = document.createElement("span");
-  itemValue.className = "item-value";
-  itemValue.textContent = "R$ " + (newValue * quantity).toFixed(2);
-  li.appendChild(itemValue);
-
-  var itemQuantity = document.createElement("span");
-  itemQuantity.className = "item-quantity";
-  itemQuantity.textContent = "Quantidade: " + quantity;
-  li.appendChild(itemQuantity);
-
-  var removeBtn = document.createElement("button");
-  removeBtn.textContent = "Remover";
-  removeBtn.className = "removeBtn";
-  removeBtn.addEventListener("click", function () {
-    removeItem(li, newValue * quantity);
+  row.querySelector("#removeBtn").addEventListener("click", () => {
+    removeItem(row, newValue * quantity);
   });
-  li.appendChild(removeBtn);
 
-  itemList.appendChild(li);
   updateTotalValue(newValue * quantity);
-
+  itemId++;
   saveItems();
 }
 
-function removeItem(item, value) {
-  item.parentNode.removeChild(item);
+function removeItem(row, value) {
+  row.remove();
   updateTotalValue(-value);
   saveItems();
 }
 
+
 function updateTotalValue(value) {
-  var totalValueSpan = document.getElementById("totalValue");
-  var currentValue = parseFloat(totalValueSpan.textContent.slice(2));
-  var updatedValue = currentValue + value;
-  totalValueSpan.textContent = "R$ " + updatedValue.toFixed(2);
+  let totalValueSpan = document.getElementById("totalValue");
+  let currentValue = parseFloat(totalValueSpan.textContent.slice(2)) || 0;
+  totalValueSpan.textContent = `R$ ${(currentValue + value).toFixed(2)}`;
 }
+
+function saveItems() {
+  let items = [];
+  document.querySelectorAll("#itemTable tr").forEach((row) => {
+    let cells = row.getElementsByTagName("td");
+    if (cells.length > 0) {
+      items.push({
+        id: cells[0].textContent,
+        name: cells[1].textContent,
+        value: cells[2].textContent,
+        quantity: cells[3].textContent,
+        total: cells[4].textContent,
+      });
+    }
+  });
+  localStorage.setItem("shoppingList", JSON.stringify(items));
+}
+
+window.onload = function () {
+  let storedItems = JSON.parse(localStorage.getItem("shoppingList"));
+  if (storedItems) {
+    storedItems.forEach((item) => {
+      addItem(
+        item.name,
+        parseFloat(item.value.slice(2)),
+        parseInt(item.quantity)
+      );
+    });
+  }
+};
 
 function openTextBox() {
   Swal.fire({
-    title: "Digite algo",
+    title: "Digite o Nome da Lista",
     input: "text",
-    inputPlaceholder: "Digite o Nome da Lista",
+    inputPlaceholder: "Nome da Lista",
     showCancelButton: true,
     cancelButtonText: "Cancelar",
-    confirmButtonText: "Enviar",
+    confirmButtonText: "Salvar",
     allowOutsideClick: false,
     inputValidator: (value) => {
       if (!value) {
-        return "Por favor, digite algo!";
+        return "Por favor, digite um nome para a lista!";
       }
     },
   }).then((result) => {
     if (result.isConfirmed) {
-      const text = result.value;
-      sendText(text);
+      saveList(result.value);
     }
   });
 }
 
-function saveItems() {
-  var itemList = document.getElementById("itemList").innerHTML;
-  localStorage.setItem("shoppingList", itemList);
-}
+function saveList(listName) {
+  let section = document.querySelector("section.container");
+  let table = document.getElementById("itemTable");
+  let totalValue = document.getElementById("totalValue").textContent;
 
-function saveAllItems() {
-  var itemList = document.getElementById("itemList").innerHTML;
-  localStorage.setItem("shoppingList", itemList);
-}
-
-window.onload = function () {
-  var storedItems = localStorage.getItem("shoppingList");
-  if (storedItems) {
-    document.getElementById("itemList").innerHTML = storedItems;
-  }
-
-  var removeButtons = document.getElementsByClassName("removeBtn");
-  var totalValue = 0;
-
-  for (var i = 0; i < removeButtons.length; i++) {
-    var valueSpan = removeButtons[i].previousElementSibling;
-    var value = parseFloat(valueSpan.textContent.slice(2));
-    totalValue += value;
-
-    removeButtons[i].addEventListener("click", function () {
-      removeItem(this.parentNode, value);
+  if (table.rows.length === 0) {
+    Swal.fire({
+      title: "Atenção",
+      text: "Adicione itens antes de salvar a lista.",
+      icon: "warning",
     });
+    return;
   }
 
-  updateTotalValue(totalValue);
-};
+  let newSection = document.createElement("div");
+  newSection.innerHTML = `
+    <h4>${listName}</h4>
+    <table class="table table-responsive table-sm table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Valor</th>
+          <th>Quantidade</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${Array.from(table.rows)
+          .map(
+            (row) => `
+              <tr>
+                <td>${row.cells[0].textContent}</td>
+                <td>${row.cells[1].textContent}</td>
+                <td>${row.cells[2].textContent}</td>
+                <td>${row.cells[3].textContent}</td>
+                <td>${row.cells[4].textContent}</td>
+              </tr>
+            `
+          )
+          .join("")}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4"><b>Total</b></td>
+          <td><b>${totalValue}<b></td>
+        </tr>
+      </tfoot>
+    </table>
+  `;
 
-var removeButtons = document.getElementsByClassName("removeBtn");
-for (var i = 0; i < removeButtons.length; i++) {
-  var valueSpan = removeButtons[i].previousElementSibling;
-  var value = parseFloat(valueSpan.textContent.slice(2));
-  removeButtons[i].addEventListener("click", function () {
-    removeItem(this.parentNode, value);
-  });
-  updateTotalValue(value);
-}
+  section.appendChild(newSection);
 
-function sendText(text) {
-  Swal.fire({
-    title: "Lista Salva:",
-    text: text,
-    icon: "info",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      sendListToClass(text);
-    }
-  });
-}
-
-function sendListToClass(list) {
-  var listasContainer = document.querySelector(".listas");
-  var listaItem = document.createElement("div");
-  listaItem.classList.add("lista-item");
-
-  var texto = document.createElement("span");
-  texto.textContent = list;
-  texto.classList.add("item-text"); // Adiciona a classe 'item-text' ao elemento de texto
-  listaItem.appendChild(texto);
-
-  // Adicionar evento de clique ao lista-item
-  listaItem.addEventListener("click", function () {
-    showSavedInformation();
-  });
-
-  listasContainer.appendChild(listaItem);
-}
-
-function showSavedInformation() {
-  var itemList = document.getElementById("itemList");
-  var items = itemList.getElementsByTagName("li");
-  var savedItems = [];
-  var totalValue = 0; // Variável para armazenar a soma total dos valores
-
-  for (var i = 0; i < items.length; i++) {
-    var itemName = items[i].querySelector(".item-name").textContent;
-    var itemValue = items[i].querySelector(".item-value").textContent;
-    var itemQuantity = items[i].querySelector(".item-quantity").textContent;
-
-    savedItems.push(
-      "Item: " +
-        itemName +
-        " | Quantidade: " +
-        itemQuantity +
-        " | Valor: " +
-        itemValue
-    );
-
-    var value = parseFloat(itemValue.slice(2)); // Extrai o valor numérico do texto "R$ X.XX"
-    totalValue += value; // Adiciona o valor ao totalValue
-  }
-
-  savedItems.push("Total: R$ " + totalValue.toFixed(2)); // Adiciona a soma total ao array savedItems
+  document.getElementById("itemTable").innerHTML = "";
+  document.getElementById("totalValue").textContent = "R$ 0.00";
+  itemId = 1;
 
   Swal.fire({
-    title: "Lista Salva:",
-    html: savedItems.join("<br>"),
-    icon: "info",
-  });
-}
-
-function sendText(text) {
-  Swal.fire({
-    title: "Lista Salva:",
-    text: text,
-    icon: "info",
-  }).then((result) => {
-    sendListToClass(text); // Adiciona a chamada para a função sendListToClass() aqui
+    title: "Sucesso",
+    text: "Lista salva com sucesso!",
+    icon: "success"
   });
 }
