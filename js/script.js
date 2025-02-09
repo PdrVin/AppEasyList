@@ -42,7 +42,7 @@ function addItem(newItem, newValue, quantity) {
         <td>R$ ${newValue.toFixed(2)}</td>
         <td>${quantity}</td>
         <td>R$ ${(newValue * quantity).toFixed(2)}</td>
-        <td><button class="btn btn-danger" id="removeBtn">Remover</button></td>
+        <td><button class="btn btn-danger py-1" id="removeBtn">Remover</button></td>
     `;
 
   row.querySelector("#removeBtn").addEventListener("click", () => {
@@ -138,7 +138,7 @@ function saveList(listName) {
     <table class="table table-responsive table-sm table-hover">
       <thead>
         <tr>
-          <th>#</th>
+          <th class="px-2">#</th>
           <th>Item</th>
           <th>Valor</th>
           <th>Quantidade</th>
@@ -150,7 +150,7 @@ function saveList(listName) {
           .map(
             (row) => `
               <tr>
-                <td>${row.cells[0].textContent}</td>
+                <td class="px-2">${row.cells[0].textContent}</td>
                 <td>${row.cells[1].textContent}</td>
                 <td>${row.cells[2].textContent}</td>
                 <td>${row.cells[3].textContent}</td>
@@ -162,7 +162,7 @@ function saveList(listName) {
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="4"><b>Total</b></td>
+          <td class="px-2" colspan="4"><b>Total</b></td>
           <td><b>${totalValue}<b></td>
         </tr>
       </tfoot>

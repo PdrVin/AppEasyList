@@ -3,7 +3,6 @@ body,
 html {
     margin: 0;
     padding: 0;
-    color: white;
     height: 100%;
     width: 100%;
     overflow-x: hidden;
@@ -29,36 +28,19 @@ footer {
 
 /* Estilos para o container de login */
 .login-container {
-    display: flex;
     flex: 0 1;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     height: 100%;
-    padding: 0 20px;
     /* Adicionando espaçamento lateral */
 }
 
 /* Estilos para o cabeçalho do login */
 .login-header {
-    background-color: #02a154;
     width: 100%;
     height: auto;
-    text-align: center;
     border-radius: 20px;
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Estilos para o conteúdo do login */
-.login-content {
-    text-align: center;
 }
 
 .login-form {
-    background-color: #36704c;
     border-radius: 20px;
     padding: 2rem;
 }
@@ -71,41 +53,6 @@ h1 {
 
 h2 {
     padding-bottom: 1rem;
-}
-
-/* Estilos para os grupos de formulário */
-.form-group {
-    text-align: left;
-    color: white;
-    position: relative;
-    margin: 30px 0;
-    border-bottom: 2px solid #fff;
-}
-
-/* Estilos para os rótulos */
-.form-group label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    pointer-events: none;
-    transition: all 0.5s ease-in-out;
-}
-
-.form-group input {
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    padding: 0 35px 0 5px;
-}
-
-input:focus ~ label,
-input:valid ~ label {
-    top: -5px;
 }
 
 /* Estilos para o botão de login */

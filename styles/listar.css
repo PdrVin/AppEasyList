@@ -49,6 +49,10 @@ button {
     cursor: pointer;
 }
 
+td, th {
+    padding: .25rem .5rem;
+}
+
 td {
     vertical-align: middle;
 }
