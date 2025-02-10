@@ -1,8 +1,8 @@
 let itemId = 1; // ID incremental
 
-document.getElementById("showFormBtn").addEventListener("click", showForm);
+document.getElementById("showFormBtn").addEventListener("click", addItemForm);
 
-function showForm() {
+function addItemForm() {
   Swal.fire({
     title: "Adicionar Item",
     html: `
@@ -60,7 +60,6 @@ function removeItem(row, value) {
   saveItems();
 }
 
-
 function updateTotalValue(value) {
   let totalValueSpan = document.getElementById("totalValue");
   let currentValue = parseFloat(totalValueSpan.textContent.slice(2)) || 0;
@@ -97,11 +96,11 @@ window.onload = function () {
   }
 };
 
-function openTextBox() {
+function saveListForm() {
   Swal.fire({
-    title: "Digite o Nome da Lista",
+    title: "Salvar Lista",
     input: "text",
-    inputPlaceholder: "Nome da Lista",
+    inputPlaceholder: "Digite o Nome da Lista",
     showCancelButton: true,
     cancelButtonText: "Cancelar",
     confirmButtonText: "Salvar",

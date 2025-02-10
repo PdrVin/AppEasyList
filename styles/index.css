@@ -1,13 +1,3 @@
-/* Estilos padrão para o corpo e HTML */
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-}
-
 body {
     background-image: url(/images/background.png);
     background-repeat: no-repeat;
@@ -18,69 +8,43 @@ body {
     min-height: 100vh;
 }
 
-footer {
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 12px;
-}
-
-/* Estilos para o container de login */
-.login-container {
+section {
     flex: 0 1;
     height: 100%;
-    /* Adicionando espaçamento lateral */
 }
 
-/* Estilos para o cabeçalho do login */
-.login-header {
+header {
     width: 100%;
-    height: auto;
     border-radius: 20px;
 }
 
-.login-form {
+form {
     border-radius: 20px;
     padding: 2rem;
+    transition: all 0.5s ease;
 }
 
-/* Estilos para os títulos */
-h1 {
-    margin: 20px 10px;
-    font-size: 30px;
-}
-
-h2 {
-    padding-bottom: 1rem;
+footer {
+    font-size: 12px;
 }
 
 /* Estilos para o botão de login */
 button {
-    width: 30%;
     height: 40px;
     background-color: #0eb68c;
     border: none;
     outline: none;
-    cursor: pointer;
     color: white;
-    font-size: 1rem;
     font-weight: 600;
-    transition: all 0.4s ease;
+    transition: all 0.5s ease;
 }
 
-.btn-login {
+.btn-style {
     border-radius: .375rem;
 }
 
-.btn-login:hover {
+.btn-style:hover {
     background-color: #0eb68cbb
-}
-
-/* Estilos para a opção de cadastro */
-.signup-option {
-    margin: 20px 0;
-    font-size: 14px;
 }
 
 /* Estilos para o link de cadastro */
